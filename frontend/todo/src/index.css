@@ -1,6 +1,9 @@
 .todoItems {
   display: flex;
 }
+.no-bullet {
+  list-style-type: none;
+}
 
 input {
   width: 10em;
@@ -8,5 +11,5 @@ input {
 }
 
 #todoList{
-  font-size: 24px;
+  font-size: 28px;
 }

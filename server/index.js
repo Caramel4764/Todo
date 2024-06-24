@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+//const {ObjectId} = require('mongodb')
 require('dotenv').config()
 mongoose
   .connect(
@@ -14,7 +15,10 @@ mongoose
     console.log(err);
   });
 const schema = new mongoose.Schema({
-  name: String,
+  name: {
+    type:String,
+    required:true,
+  },
 })
 const Todo = mongoose.model("todo", schema)
 app.use(express.json());
@@ -23,16 +27,23 @@ app.use(cors());
 
 app.get("/api", async (req, res)=>{
   const allTodo = await Todo.find();
-  res.json(allTodo);
+  return res.json(allTodo);
 })
 app.post("/api", async (req, res) => {
   const newTodo = new Todo({
-    name: req.body.name
+    name: req.body.name,
+    //_id: req.body._id,
   })
-  await newTodo.save()
+  //console.log(newTodo)
+  await newTodo.save();
+  //return resolve();
+  return res.json(1)
 })
-app.delete('api', (req, res) => {
-  console.log('deleted')
+//req.params
+app.delete('/api/:_id', async (req, res) => {
+  await Todo.findByIdAndDelete(req.params._id);
+  return res.json(1)
+
 })
 
 app.listen(process.env.PORT, () => console.log("Server started"));
