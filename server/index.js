@@ -19,6 +19,15 @@ const schema = new mongoose.Schema({
     type:String,
     required:true,
   },
+  isCompleted: {
+    type:Boolean,
+    required:true
+  },
+  priority: {
+    type: String,
+    enum: ['Low', 'Medium', 'High'],
+    default: 'Low'
+  }
 })
 const Todo = mongoose.model("todo", schema)
 app.use(express.json());
@@ -32,18 +41,22 @@ app.get("/api", async (req, res)=>{
 app.post("/api", async (req, res) => {
   const newTodo = new Todo({
     name: req.body.name,
-    //_id: req.body._id,
+    isCompleted: req.body.isCompleted,
+    priority: req.body.priority
   })
-  //console.log(newTodo)
   await newTodo.save();
   //return resolve();
-  return res.json(1)
+  return res.json()
 })
 //req.params
 app.delete('/api/:_id', async (req, res) => {
   await Todo.findByIdAndDelete(req.params._id);
-  return res.json(1)
+  return res.json()
 
 })
+app.put('/api/markDone/:_id', async (req, res)=>{
+  await Todo.findByIdAndUpdate(req.params._id, {isCompleted:true})
+  return res.json()
 
+})
 app.listen(process.env.PORT, () => console.log("Server started"));
