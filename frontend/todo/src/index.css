@@ -1,3 +1,7 @@
+body {
+  background-color: lightblue;
+}
+
 .todoItems {
   display: flex;
 }
@@ -7,6 +11,11 @@
 .completed {
   text-decoration: line-through;
 }
+#todoList div div:hover{
+  cursor: pointer;
+  color:gray;
+  text-decoration: line-through;
+}
 input {
   width: 10em;
   font-size: 24px;
@@ -14,4 +23,7 @@ input {
 
 #todoList{
   font-size: 28px;
+}
+.lightBlueBg {
+  background-color: rgb(141, 188, 229);
 }
