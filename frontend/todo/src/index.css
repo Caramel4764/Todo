@@ -4,7 +4,9 @@
 .no-bullet {
   list-style-type: none;
 }
-
+.completed {
+  text-decoration: line-through;
+}
 input {
   width: 10em;
   font-size: 24px;

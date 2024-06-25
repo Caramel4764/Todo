@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get("/api", async (req, res)=>{
-  const allTodo = await Todo.find();
+  const allTodo = await Todo.find().sort({isCompleted:1});
   return res.json(allTodo);
 })
 app.post("/api", async (req, res) => {

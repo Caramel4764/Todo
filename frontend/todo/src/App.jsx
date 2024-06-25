@@ -103,7 +103,7 @@ function App() {
           (todo.priority==priorityFilter||priorityFilter=="")&&<div
             key={index}
             className={`no-bullet todoItems d-flex justify-content-between ${
-              todo.isCompleted && "text-danger"
+              todo.isCompleted && "completed"
             }`}
           >
             <div className="d-flex">
